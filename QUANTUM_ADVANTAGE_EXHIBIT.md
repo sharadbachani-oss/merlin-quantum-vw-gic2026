@@ -67,7 +67,7 @@ can follow. This is the same trust structure used for every accepted
 beyond-classical result in the field — executed here with the referee
 attack commissioned by us, against us, with its receipts published.
 
-## The advantage of route — stated and bounded (the award-tested formulation)
+## The advantage of route — stated and bounded (the judged formulation)
 
 For interacting mobility media the industrially decisive quantity is the
 real-frequency collective response — how a congestion field's collective
@@ -76,8 +76,8 @@ classical route to real-frequency response functions is imaginary-time
 simulation plus analytic continuation, which is **mathematically ill-posed
 at any system size, independent of entanglement or coupling strength**:
 distinct spectra reproduce the same imaginary-time data within any finite
-error bar (counterexample pair exhibited in our GIC award repository,
-where this route argument was validated by independent judges — runner-up,
+error bar (counterexample pair exhibited in our GIC 2026 finalist
+repository, where this route argument went through independent judging —
 GIC 2026 Mitsubishi/AIST track). Quantum hardware evolves on the real-time
 axis natively: the spectrum follows by direct Fourier transform with **no
 continuation step** — `vw_jam_relaxation_spectrum.json` in this package is

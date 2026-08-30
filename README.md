@@ -6,7 +6,8 @@
 | **Project** | Quantum Advantage of Route for Mobility Response, with Quantum-in-the-Loop Training and Certified Runtime Assurance |
 | **Tracks** | RL Alignment (primary scored) · Safety (secondary scored) · Context: Autonomous Driving / Mobility |
 | **Write-up** | `VW_REPORT_v2.md` (advantage exhibit + two scored tracks + hardware annex + negatives) |
-| **Prior result** | GIC 2026 Mitsubishi/AIST track — **runner-up award**; same framework, same instrument discipline |
+| **Prior result** | GIC 2026 — **dual-track finalist** (Mitsubishi/AIST materials track); same framework, same instrument discipline |
+| **Public repository** | https://github.com/sharadbachani-oss/merlin-quantum-vw-gic2026 |
 
 ## The claim in one line
 

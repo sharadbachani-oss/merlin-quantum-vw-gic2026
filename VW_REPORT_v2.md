@@ -2,7 +2,8 @@
 
 **Global Quantum + AI Challenge 2026 — Enterprise Challenge (Volkswagen)**
 **Tracks: RL Alignment (primary scored) + Safety (secondary scored) · Context: Autonomous Driving / Mobility**
-**Team: Merlin Digital (GIC 2026 Mitsubishi/AIST track — runner-up award) · Report v2, 2026-08-26**
+**Team: Merlin Digital (GIC 2026 dual-track finalist — Mitsubishi/AIST materials track) · Report v2, 2026-08-26**
+**Public repository: https://github.com/sharadbachani-oss/merlin-quantum-vw-gic2026**
 
 ---
 
@@ -30,8 +31,8 @@ classical route to real-frequency response functions is imaginary-time
 simulation plus analytic continuation, which is **mathematically ill-posed
 at any system size, independent of entanglement or coupling**: distinct
 spectra reproduce the same imaginary-time data within any finite error bar
-(counterexample pair exhibited in our GIC award repository; this route
-argument was validated by independent judges — runner-up, GIC 2026).
+(counterexample pair exhibited in our GIC 2026 finalist repository; this
+route argument has been through independent judging — dual-track finalist).
 Quantum hardware evolves on the real-time axis natively; the spectrum
 follows by direct Fourier transform with **no continuation step**. This
 package ships that object: the collective fluctuation series X(q,t) of a
@@ -169,9 +170,9 @@ is reported as method provenance, not a scored claim.
   framework vacuum violates the CHSH bound at **S = 2.3604, +35.9σ**,
   independently replicated same-day (+37.0σ), derived null behaving.
 - **Provenance chain:** two months, five instrument classes, two vendors,
-  21 adjudicated frozen-prediction rows (GIC award ledger) plus this
+  21 adjudicated frozen-prediction rows (GIC 2026 finalist ledger) plus this
   submission's ~90 receipted jobs; the same discipline that placed
-  runner-up in the GIC 2026 Mitsubishi/AIST track.
+  a dual-track finalist placement in GIC 2026.
 
 ## 6. Deployment architecture
 
@@ -225,7 +226,7 @@ receipt of the same class as every pass. Deadline: GIC 2026 Phase I closes
 
 ---
 *Team Merlin Digital. One framework, one instrument discipline, from a
-runner-up GIC materials result to this mobility submission: the classical
+GIC-finalist materials result to this mobility submission: the classical
 route to real-frequency response is broken by mathematics; the processor
 travels the route natively; the boundary is measured, adjudicated, and
 published.*
