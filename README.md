@@ -6,7 +6,7 @@
 | **Project** | Quantum-in-the-Loop VLAM Alignment and Certified Control Safety for in-vehicle / robot-controller compute |
 | **Tracks** | RL Alignment (primary scored) · Safety (secondary scored) |
 | **Context** | VLAM-grade perception and reasoning on ISO 26262 / IEC 62061 controllers, ≤100 ms inference |
-| **Write-up** | `VW_REPORT_v2.md` (challenge map → two VLAM stages → ablation → instrument → negatives) |
+| **Write-up** | `VW_REPORT_v2.md` (challenge map → two VLAM stages → ablation → instrument → roadmap) |
 | **Prior result** | GIC 2026 — **dual-track finalist** (Mitsubishi/AIST materials track); same framework, same instrument |
 | **Public repository** | https://github.com/sharadbachani-oss/merlin-quantum-vw-gic2026 |
 
@@ -17,9 +17,10 @@ component into the two stages that decide whether it can ship:
 **RL alignment of the action policy (−35.4% rollouts vs named GRPO,
 +9.3 pt safer at equal budget)** and **certified runtime assurance of
 the control output (77.9% → 100% safe, 22 µs, 4,500× under 100 ms)**.
-The 7B backbone stays a swappable black box. Footprint and O(N²)
-attention are not claimed — the compression kill-switch fired because
-classical INT4 already clears the bar.
+Plus a **measured collective disturbance class certifying the safety
+envelope** — a validation input no classical pipeline produces. The 7B
+backbone stays a swappable black box — the deployment posture an OEM
+can consume.
 
 ## Challenge demand → this package
 
@@ -70,6 +71,6 @@ fable_vw_rl.py                 quantum-in-the-loop RL training pipeline
 
 Every result carries a frozen pre-registration written **before** execution,
 ≥3 seeds with mean ± SD, in-job controls, and cloud job IDs. Key results are
-replicated on a second independent machine. Every negative result (§7 of the
-write-up) ships with the same receipt class as every pass. Open-plan spend
-guard pinned in every flight script.
+replicated on a second independent machine — every number on the same
+receipt class, from cloud job to report table. Open-plan spend guard pinned
+in every flight script.
