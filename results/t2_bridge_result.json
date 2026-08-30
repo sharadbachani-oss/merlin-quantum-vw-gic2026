@@ -1,0 +1,37 @@
+{
+ "card": "T2 bridge from banked flights \u2014 no new hardware",
+ "kingston_v2": {
+  "ratio_median": 0.9305868991576141,
+  "residual_median": 0.0018903403505065117,
+  "n_protected": 8,
+  "n": 9,
+  "T2_bell_us": 62.114817965688374,
+  "T2_single_us": 114.59909900476323
+ },
+ "fez_v2": {
+  "ratio_median": 0.9145986349844495,
+  "residual_median": 0.0015610941897573165,
+  "n_protected": 7,
+  "n": 9,
+  "T2_bell_us": 43.34944076181771,
+  "T2_single_us": 84.64077366805229
+ },
+ "kingston_sl1": {
+  "ratio_median": 0.9628622463793354,
+  "residual_median": 0.0006293286378164821,
+  "n_protected": 6,
+  "n": 9,
+  "T2_bell_us": 41.20305557389999,
+  "T2_single_us": 69.79437375228046
+ },
+ "prediction_kingston": {
+  "median_rel": 0.06941310084238592,
+  "n_within_25": 9,
+  "n": 9
+ },
+ "prediction_fez": {
+  "median_rel": 0.08540136501555062,
+  "n_within_25": 9,
+  "n": 9
+ }
+}

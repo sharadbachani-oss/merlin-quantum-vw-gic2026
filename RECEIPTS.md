@@ -1,9 +1,11 @@
 # RECEIPTS — claim → file → job-ID map (VW Enterprise Track, GIC 2026)
 
-Every headline claim in `VW_REPORT_v2.md` maps to a shipped artifact and, where
-it is a hardware claim, an IBM Quantum / QCi Dirac-3 job ID. Hardware figures
-regenerate from archived data with no credentials; submitting new jobs needs
-IBM Quantum / qBraid access.
+Scored deliverable: quantum / QI component in two VLAM stages (RL
+alignment + control-output safety). Supporting annex: jam-relaxation
+spectrum. Every headline claim in `VW_REPORT_v2.md` maps to a shipped
+artifact and, where it is a hardware claim, an IBM Quantum / QCi Dirac-3
+job ID. Hardware figures regenerate from archived data with no
+credentials; submitting new jobs needs IBM Quantum / qBraid access.
 
 ## Advantage of route (§1)
 
@@ -38,6 +40,16 @@ IBM Quantum / qBraid access.
 | Claim | Artifact | Receipt |
 |---|---|---|
 | Flow encoding −26%, 3.5× tighter (frozen prediction) | `results/flow_encoding_test.json` | 12 paired Dirac-3 jobs |
+
+## Full-capability instrument (§5.1) — banked, no copy flights
+
+| Claim | Artifact | Receipt |
+|---|---|---|
+| ζ atlas + sector arithmetic, kingston 9/9 | `results/npoint2_result_20260830_014105.json` | kingston `da9l3t1qtnsc73d1nhd0` / `da9l9rkjbipc73ff0aqg` |
+| ζ atlas + sector arithmetic, fez 8/9 | `results/npoint2_result_20260829_182700.json` | fez `da9eoe6rbfbs73chiq0g` / `da9lqeerbfbs73chq63g` |
+| T2 composition 7%/9% on 18 edges | `results/t2_bridge_result.json` | banked re-analysis of the v2 raws |
+| Native operator E₀ inverted, 5/5 live tiles | `results/ncomp_regrade_20260830_122917.json`, `results/ncomp_regrade_20260830_123936.json` | kingston `da9vgsmrbfbs73ci44d0`; fez `da9vblkjbipc73ffaio0` |
+| Estimator inversion (best tile −0.006) | `results/nc1_energy_inverted.json` | same jobs; V = L0 |
 
 ## Negatives, receipted (§7)
 

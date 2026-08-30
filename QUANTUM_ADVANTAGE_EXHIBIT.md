@@ -1,6 +1,9 @@
-# Quantum Advantage Exhibit — the Wall Crossing (Phase-1 headline)
+# Supporting annex — mobility spectrum (not a scored track)
 
-**Merlin Digital · 2026-08-09 · All claims carry cloud job receipts.**
+**Merlin Digital · updated 2026-08-30.** The scored Volkswagen answer is
+VLAM-stage RL alignment and certified control safety (`VW_REPORT_v2.md`).
+This annex is the supporting real-frequency disturbance class those
+tracks consume in Phase II. All claims carry cloud job receipts.
 
 ## The claim
 

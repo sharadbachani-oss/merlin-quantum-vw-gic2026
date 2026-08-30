@@ -17,10 +17,10 @@ R = os.path.join(os.path.dirname(__file__), "results")
 def load(n): return json.load(open(os.path.join(R, n), encoding="utf-8"))
 
 print("=" * 64)
-print("VW submission — clean-environment result replication")
+print("VW submission — VLAM-stage result replication (no credentials)")
 print("=" * 64)
 
-# --- 1. Advantage of route: jam-relaxation spectrum -----------------------
+# --- 1. Supporting annex: jam-relaxation spectrum -------------------------
 try:
     sp = load("vw_jam_relaxation_spectrum.json")
     print("\n[1] S(q,w) jam-relaxation spectrum (real-time, no continuation)")
