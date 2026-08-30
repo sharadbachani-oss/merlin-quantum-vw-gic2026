@@ -1,0 +1,5 @@
+# Result replication (verify.py) — clean environment:
+numpy>=1.24
+# Model gates and hardware flights (optional; flights need your own credentials):
+qiskit>=1.0
+qiskit-ibm-runtime>=0.20
