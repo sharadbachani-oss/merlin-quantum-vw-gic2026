@@ -132,21 +132,24 @@ three disturbance ensembles at *identical rms power*: white noise, an
 AR(1) surrogate matched to variance and autocorrelation (the standard
 classical validation models), and the **measured collective disturbance
 spectrum** — the real-frequency jam-relaxation object computed on quantum
-hardware from receipted flights (annex; dominant collective line 0.0625
-cycles/step). Result (3 seeds × 1,000 episodes per cell): the two
-classical validation models misjudge safety by **25–70 points in opposite
-directions** at matched power. White-noise validation grades 100.0 ± 0.0%
-safe at every amplitude — including 1.3 rad/s rms, where the true safe
-rate is 34% (unbounded over-certification). The AR surrogate never
-reaches 95% safe even at 0.7 rad/s (41.1 ± 2.5%), so surrogate-based
-certification surrenders **≥3× of the legitimate amplitude envelope
-(≥9× in power)**. Against the measured spectrum the certified boundary
-is **0.88 rad/s rms** (98.7 ± 0.0% at 0.80; 93.4 ± 0.5% at 0.90) —
-recovered operating envelope at equal certified safety, robust across
-the step-to-seconds mapping (swept 1–2 s/step). The vehicle-side story
-is unchanged: quantum computes the disturbance model at
-certification time; the car runs the 22 µs monitor. Receipt:
-`results/vw_cert_gap_score.json`.
+hardware, full k=0–15 series on the 64-rung interacting lattice, dominant
+collective line 0.0625 cycles/step reproduced on two devices (fez
+`daa9pn4e74ec73akj9i0`; annex flight). Results (3 seeds × 1,000 episodes
+per cell): the certified boundary against the measured spectrum is
+**0.60 rad/s rms** (95.6 ± 0.8% safe; 98.4 ± 0.3% at 0.50). The two
+classical validation models miss it from opposite sides: **white-noise
+validation grades 100.0 ± 0.0% safe at every amplitude through 1.3 rad/s
+— where the true safe rate is 39%** — unbounded over-certification; the
+AR surrogate reads **25.2 ± 2.1% at the certified boundary itself**, a
+70-point misjudgment at the operating point, and would force certification
+several-fold below the true envelope. Spectral depth is load-bearing:
+certifying against a shallow (16-point anchor-sector) spectrum places the
+boundary at 0.88 rad/s — a **32% envelope error that only the full-depth
+computation catches**. The vehicle-side story is unchanged: quantum
+computes the disturbance model at certification time; the car runs the
+22 µs monitor. Receipts: `results/vw_cert_gap_score_v2.json`,
+`results/vw_cert_gap_boundary_v2.json`,
+`results/vw_jam_relaxation_spectrum_v2.json`.
 
 ## 4. Mandatory ablation — isolating the quantum / QI component
 
