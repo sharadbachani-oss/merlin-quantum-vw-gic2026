@@ -41,6 +41,28 @@ Every number in this report regenerates from archived receipts (§8).
 
 ## 1. VLAM integration — the component, not a cloud VLAM
 
+**The field's two named blockers, and why this architecture answers
+both.** The 2026 VLAM-for-driving literature converges on the same pair
+of obstacles: inference latency of **500–2000 ms**, "far exceeding
+control cycle requirements" (DriveVLM-RL, arXiv:2603.18315; VLAM survey,
+arXiv:2512.16760), and susceptibility to **hallucination** — outputs
+"inconsistent with visual input." Against a 100–300 ms authorization
+budget, the first is a 5–20× structural overrun; the second is an
+uncertified action reaching the actuator.
+
+These are not two problems but one deployment consequence: **a VLAM
+cannot be the thing that decides, so it must be wrapped by something
+certified and fast.** That is precisely what §3 delivers — a 22 µs
+certified runtime-assurance monitor (4,500× inside the budget) with a
+verified fallback, wrapping a learned policy that is treated as
+untrusted by construction. The wrap does not require the VLAM to become
+faster or stop hallucinating; it bounds what either failure can do. On
+this reading the safety track is not a compliance exercise but the
+component that makes VLAM deployment tractable at all — and the
+disturbance class it is certified against is computed on quantum
+hardware (§3), which is where our quantum contribution enters the
+critical path of the field's actual blocker.
+
 A VLAM is perception → reasoning → **action**. The 7B–10B backbone is
 what OEMs cannot train or host on the vehicle. Two stages around that
 backbone are where a quantum / QI component can change the product
@@ -237,6 +259,37 @@ cost (§2) and certified safety (§3). Attention O(N²) is Phase II scope
 (annex). The demonstrations run on a 2-state control substrate with
 compact policies; the 7B backbone remains a swappable black box by
 design (§1) — the deployment posture an OEM can consume.
+
+## 7b. Related work and positioning
+
+**VLAM deployment.** The blockers this entry targets are the ones the
+field names: inference latency of 500–2000 ms against a 100–300 ms
+control budget, and hallucinated actions inconsistent with visual input
+(DriveVLM-RL, arXiv:2603.18315; *VLAM for Autonomous Driving: Past,
+Present, Future*, arXiv:2512.16760). Recent work attacks these inside
+the model — AlphaDrive applies RL and reasoning to VLM planning, AutoVLA
+discretises trajectories into action tokens, ALN-P3 aligns perception,
+prediction and planning. Our position is complementary and deliberately
+outside the model: **treat the backbone as untrusted and swappable, and
+certify the wrap.** That is what makes the safety artifact survive a
+model upgrade without re-certification.
+
+**Quantum in automotive.** Published automotive quantum work is
+predominantly annealing-based combinatorial optimisation — traffic
+routing (Volkswagen/D-Wave, Lisbon), materials and battery chemistry
+(Volkswagen/Google), and paint-shop scheduling. This entry is a
+different class: a quantum component *inside the RL training loop*, and
+a certified control artifact whose disturbance model is computed as a
+real-time many-body spectrum. To our knowledge no published automotive
+quantum work certifies a control envelope against a hardware-computed
+disturbance class.
+
+**Where we do not claim novelty.** The runtime-assurance pattern
+(certified monitor plus verified fallback wrapping an uncertified
+policy) is established in aerospace and control literature. Our
+contributions are the quantum-computed disturbance class it is certified
+against, and the measurement that classical surrogate disturbance models
+misjudge the certified boundary in both directions (§3).
 
 ## 8. Reproducibility
 
