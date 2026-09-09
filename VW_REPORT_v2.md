@@ -119,6 +119,16 @@ equivalence), and a variance collapse (baseline SD 22–28 pts — seeds that
 never learn — vs curriculum SD 1.8): **curriculum selection de-risks the
 training run.** Robust across stress windows (+16 to +21 pts).
 
+*Attribution, stated exactly.* The Pareto rungs quoted above are **arm E**
+(the tuned classical Gibbs curriculum), not arm C (the device). On the
+raw rollouts-to-target metric arm E is the stronger arm — **298.7 ± 106.9
+versus the device's 378.7 ± 52.9** — so the device does not win that
+metric against every classical arm, and we do not claim it does. The
+device's measured advantages on this track are specific and narrower:
+it beats the **named GRPO baseline** by 35.4%, requires **zero tuned
+parameters** where arm E requires per-task temperature tuning, and carries
+**roughly half the seed variance**. §4 isolates the mechanism.
+
 ## 3. Safety track (scored): certified runtime assurance
 
 **Method.** Tensor-network Lyapunov monitor V(x)=‖L·φ(x)‖² (3-level

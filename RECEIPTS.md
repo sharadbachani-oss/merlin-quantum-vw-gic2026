@@ -11,7 +11,8 @@ credentials; submitting new jobs needs IBM Quantum / qBraid access.
 
 | Claim | Artifact | Job ID / receipt |
 |---|---|---|
-| S(q,ω) jam-relaxation spectrum, no continuation step | `results/vw_jam_relaxation_spectrum.json` | IBM Heron fez `d9rm4j9dsedc73agrb70` (real-time series source) |
+| S(q,ω) jam-relaxation spectrum v1, no continuation step | `results/vw_jam_relaxation_spectrum.json` | IBM Heron fez `d9rm4j9dsedc73agrb70` (real-time series source) |
+| **S(q,ω) v2 — the spectrum used for the §3 certified boundary** | `results/vw_jam_relaxation_spectrum_v2.json` (and the byte-identical `..._v2_shim.json` consumed by the scoring script) | **IBM Heron fez `daa9pn4e74ec73akj9i0`** (33 circuits × 32,768 shots, k=0–15) |
 | Real-time collective interface, 156 qubits | `results/a1p_result_20260808_200224.json` | fez `d9rm4j9dsedc73agrb70` (36×8,192) |
 | Adjudicated classical boundary (two-sided) | `A1_FINAL_VERDICT.md` (in session record) | kingston `d9rdfb1dsedc73agh5ng` (16×32,768) + attack receipts |
 | Exact-theorem anchors 0.9836/0.9806; 18-line spectrum vs detuned | `results/a1p_result_20260808_200224.json` | fez `d9rm4j9dsedc73agrb70`; scout `d9rm47opdb6s73e53kqg` |
