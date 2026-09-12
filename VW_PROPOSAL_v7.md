@@ -34,6 +34,8 @@ We put a quantum component into the two VLAM stages that decide whether the back
 | VLA backbone run (Phase 2) | OpenVLA-OFT / LIBERO on a single 8-GPU node; 3 seeds; GPU-hours declared in the resource declaration |
 | Classical | 32-core workstation for the tensor-network certifier and the adversarial classical attack |
 
+**Scope, stated with its treatment.** (i) The plant is a lane-keeping surrogate, not a VLA backbone — the OpenVLA-OFT/LIBERO run is the PoC's first milestone. (ii) The tuned classical Gibbs arm beats the device on raw rollouts — the device claim is the named baseline, zero tuning and half the variance. (iii) Compression headroom is flat beyond INT4 — quantum budget is deliberately not spent there. (iv) The disturbance spectrum carries no fidelity certificate yet — the parity-syndrome bound and ion-trap replication are Phase-2 deliverables. (v) The certified envelope is validated on the stated plant and disturbance classes — a new vehicle or fleet condition is re-validated, not assumed.
+
 Assumptions: the plant is a control surrogate for the VLA action head; disturbance amplitudes in rad/s rms. Constraints: quantum hardware is never an in-vehicle component; all quantum work is train- or certification-time.
 
 ## 4. Expected impact
