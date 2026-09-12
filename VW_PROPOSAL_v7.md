@@ -42,6 +42,8 @@ Assumptions: the plant is a control surrogate for the VLA action head; disturban
 
 **RL alignment — rollouts to target (seeds 21/22/23, mean ± SD):** A, GRPO-32 random (named baseline) 586.7 ± 98.8; **C, Dirac-3-16 untuned 378.7 ± 52.9 (−35.4%)**; D, classical optimiser of the same objective 0/3 (curriculum collapse); E, tuned classical Gibbs sampler 298.7 ± 106.9 — stronger on raw rollouts, at 2× the device's variance and with per-task temperature tuning the device does not need; C′, device on optimiser-grade encoding 0/3. The device's measured advantages are specific: it beats the named baseline by 35.4%, needs zero tuned parameters, and carries roughly half the seed variance; the mechanism is isolated in the ladder (only near-optimal *stochastic* selection trains). At equal budget the curriculum yields a safer driver: 76.4 ± 0.7% vs 67.1 ± 1.3% safe on the held-out stress suite (**+9.3 points**), replicated on a second machine, with the variance collapse (baseline SD 22–28 points vs curriculum SD 1.8) that de-risks the training run.
 
+![Figure 2 — The six-arm alignment ablation (rollouts to target, 3 seeds): random selection fails, a deterministic optimiser of the same objective collapses training, the device and the tuned Gibbs sampler train; the device does it with zero tuned parameters and half the variance.](C:/quantum ai 2026/figs_v7/vw_ladder.png)
+
 **Control safety:** policy alone 77.9 ± 25.0% safe at the certified boundary → **100.0 ± 0.0%** wrapped (3 seeds × 500 episodes per condition); guard idles under benign conditions (1–12% intervention); 22 µs per decision. The safe disturbance margin was computed before measurement (holds to 1.0 rad/s; collapse predicted in [1.2, 1.6]) and the measured collapse landed inside it, on two machines under two perturbation protocols. Versus tuned heuristic clipping: the envelope is known a priori, zero tuned parameters, and the V > 0, dV ≤ 0 evidence chain an ISO 26262 case consumes. Rank ablation: r = 3 interior-optimal at 0.462 ± 0.030 certified area; the TN certificate covers 1.57 ± 0.29× the best quadratic's area.
 
 **Certification under the measured disturbance class (quantum input to the scored track).** Three ensembles at identical rms power, 3 seeds × 1,000 episodes per cell: against the **measured collective spectrum** the certified boundary is **0.60 rad/s rms** (95.6 ± 0.8% safe; 98.4 ± 0.3% at 0.50). White-noise validation grades 100.0 ± 0.0% safe at every amplitude through 1.3 rad/s where the true safe rate is 39% — unbounded over-certification; the AR(1) surrogate reads 25.2 ± 2.1% at the certified boundary itself. A shallow 16-point anchor-sector spectrum places the boundary at 0.88 rad/s, a 32% envelope error only the full-depth computation catches. The vehicle runs the 22 µs monitor; quantum computes the disturbance model at certification time.
@@ -74,20 +76,24 @@ Merlin Quantum is the quantum division of Merlin Digital (50+ technology FTE): S
 
 ### Appendix A — Hardware job register (every result regenerates from archived counts)
 
-| measurement | machine | job id(s) | receipt |
-|---|---|---|---|
-| RL curriculum, arm C, 3 seeds (71 jobs) | QCi Dirac-3 | 71 ids in `vw_rl_C_s{21,22,23}.json` | `vw_rl_{A..E}_s*.json` |
-| Dirac-trained certificate seeds | QCi Dirac-3 | 27 ids in `results/trackb_seed{21,22,23}.json` | same |
-| Flow-encoding test, 6 paired trials | QCi Dirac-3 | 12 paired ids | `results/flow_encoding_test.json` |
-| 128q jam-relaxation spectrum v2, k = 0..15, 33 × 32,768 shots | ibm_fez | `daa9pn4e74ec73akj9i0` | `results/vw_jam_relaxation_spectrum_v2.json` |
-| 156q real-time collective interface, exact-theorem anchors 0.9836 / 0.9806 | ibm_fez | `d9rm4j9dsedc73agrb70`; scout `d9rm47opdb6s73e53kqg` | `results/a1p_result_20260808_200224.json` |
-| Two-sided classical boundary series, 16 × 32,768 | ibm_kingston | `d9rdfb1dsedc73agh5ng` | `A1_FINAL_VERDICT.md` |
-| Idle-ZZ atlas, 9/9 edges | ibm_kingston | `da9l3t1qtnsc73d1nhd0`, `da9l9rkjbipc73ff0aqg` | `results/npoint2_result_20260830_014105.json` |
-| Idle-ZZ atlas, 8/9 edges | ibm_fez | `da9eoe6rbfbs73chiq0g`, `da9lqeerbfbs73chq63g` | `results/npoint2_result_20260829_182700.json` |
-| Native-operator E₀ inverted, 5/5 tiles | ibm_kingston / ibm_fez | `da9vgsmrbfbs73ci44d0`, `da9vblkjbipc73ffaio0` | `results/ncomp_regrade_*.json`, `results/nc1_energy_inverted.json` |
-| Directed-path traffic card — converges classically, kept as negative control | ibm_kingston | receipt in file | `results/trafficD_kingston_result.json` |
-| CHSH in-kind anchor S = 2.3604 (+35.9σ), same-day replica +37.0σ | ibm_fez | GIC ledger `chsh_*_20260805_*.json` | — |
-| Safety, envelope, rank ablation, cert-gap sweeps | CPU (two machines) | — | `vw_rta_demo.json`, `vw_lyap_*.json`, `results/vw_cert_gap_*_v2.json` |
+| measurement | machine | job id(s) |
+|---|---|---|
+| 128q jam-relaxation spectrum v2, k = 0..15, 33 × 32,768 shots | ibm_fez | `daa9pn4e74ec73akj9i0` |
+| 156q real-time collective interface, exact-theorem anchors 0.9836 / 0.9806 | ibm_fez | `d9rm4j9dsedc73agrb70`; scout `d9rm47opdb6s73e53kqg` |
+| Two-sided classical boundary series, 16 × 32,768 | ibm_kingston | `d9rdfb1dsedc73agh5ng` |
+| Idle-ZZ atlas, 9/9 edges | ibm_kingston | `da9l3t1qtnsc73d1nhd0`, `da9l9rkjbipc73ff0aqg` |
+| Idle-ZZ atlas, 8/9 edges | ibm_fez | `da9eoe6rbfbs73chiq0g`, `da9lqeerbfbs73chq63g` |
+| Native-operator E₀ inverted, 5/5 tiles | ibm_kingston / ibm_fez | `da9vgsmrbfbs73ci44d0`, `da9vblkjbipc73ffaio0` |
+| Directed-path traffic card — converges classically, kept as negative control | ibm_kingston | `results/trafficD_kingston_result.json` |
+| CHSH in-kind anchor S = 2.3604 (+35.9σ), same-day replica +37.0σ | ibm_fez | GIC ledger `chsh_*_20260805_*.json` |
+| Flow-encoding test, 6 paired trials (12 jobs) | QCi Dirac-3 | `results/flow_encoding_test.json` |
+| RL curriculum arm C, vw_rl_C_s21.json (20 jobs) | QCi Dirac-3 | `6a76595c08442f441bbb5bd2`, `6a76597408442f441bbb5bd3`, `6a76599008442f441bbb5bd4`, `6a7659a608442f441bbb5bd5`, `6a7659bc08442f441bbb5bd6`, `6a7659de08442f441bbb5bd7`, `6a7659fc08442f441bbb5bd8`, `6a765a1a08442f441bbb5bd9`, `6a765a2e08442f441bbb5bda`, `6a765a4608442f441bbb5bdb`, `6a765a6208442f441bbb5bdc`, `6a765a7708442f441bbb5bdd`, `6a765a8d08442f441bbb5bde`, `6a765aa008442f441bbb5bdf`, `6a765ab508442f441bbb5be0`, `6a765acb08442f441bbb5be1`, `6a765ae208442f441bbb5be2`, `6a765af708442f441bbb5be3`, `6a765b0f08442f441bbb5be4`, `6a765b2208442f441bbb5be5` |
+| RL curriculum arm C, vw_rl_C_s22.json (23 jobs) | QCi Dirac-3 | `6a765b8708442f441bbb5be6`, `6a765b9d08442f441bbb5be7`, `6a765bb208442f441bbb5be8`, `6a765bc608442f441bbb5be9`, `6a765bda08442f441bbb5bea`, `6a765bee08442f441bbb5beb`, `6a765c0408442f441bbb5bec`, `6a765c1608442f441bbb5bed`, `6a765c2b08442f441bbb5bee`, `6a765c3e08442f441bbb5bef`, `6a765c5408442f441bbb5bf0`, `6a765c6808442f441bbb5bf1`, `6a765c7c08442f441bbb5bf2`, `6a765c8e08442f441bbb5bf3`, `6a765ca108442f441bbb5bf4`, `6a765cba08442f441bbb5bf5`, `6a765ccd08442f441bbb5bf6`, `6a765ce208442f441bbb5bf7`, `6a765cf508442f441bbb5bf8`, `6a765d0908442f441bbb5bf9`, `6a765d1d08442f441bbb5bfa`, `6a765d3108442f441bbb5bfb`, `6a765d4508442f441bbb5bfc` |
+| RL curriculum arm C, vw_rl_C_s23.json (28 jobs) | QCi Dirac-3 | `6a765d5b08442f441bbb5bfd`, `6a765d6f08442f441bbb5bfe`, `6a765d8308442f441bbb5bff`, `6a765d9608442f441bbb5c00`, `6a765da908442f441bbb5c01`, `6a765dbc08442f441bbb5c02`, `6a765dd508442f441bbb5c03`, `6a765dee08442f441bbb5c04`, `6a765e0208442f441bbb5c05`, `6a765e1608442f441bbb5c06`, `6a765e2908442f441bbb5c07`, `6a765e3d08442f441bbb5c08`, `6a765e5008442f441bbb5c09`, `6a765e6208442f441bbb5c0a`, `6a765e7508442f441bbb5c0b`, `6a765e8708442f441bbb5c0c`, `6a765e9a08442f441bbb5c0d`, `6a765eac08442f441bbb5c0e`, `6a765ebf08442f441bbb5c0f`, `6a765ed308442f441bbb5c10`, `6a765ee708442f441bbb5c11`, `6a765efa08442f441bbb5c12`, `6a765f0e08442f441bbb5c13`, `6a765f2108442f441bbb5c14`, `6a765f3408442f441bbb5c15`, `6a765f4608442f441bbb5c16`, `6a765f5908442f441bbb5c17`, `6a765f6b08442f441bbb5c18` |
+| Dirac-trained certificate, trackb_seed21.json (9 jobs) | QCi Dirac-3 | `6a783b7f08442f441bbb5d37`, `6a783b8b08442f441bbb5d38`, `6a783b9708442f441bbb5d39`, `6a783ba408442f441bbb5d3a`, `6a783bb108442f441bbb5d3b`, `6a783bbd08442f441bbb5d3c`, `6a783bca08442f441bbb5d3d`, `6a783bd708442f441bbb5d3e`, `6a783be408442f441bbb5d3f` |
+| Dirac-trained certificate, trackb_seed22.json (9 jobs) | QCi Dirac-3 | `6a783a7c08442f441bbb5d25`, `6a783a8708442f441bbb5d26`, `6a783a9108442f441bbb5d27`, `6a783a9c08442f441bbb5d28`, `6a783aa708442f441bbb5d29`, `6a783ab108442f441bbb5d2a`, `6a783abc08442f441bbb5d2b`, `6a783ac608442f441bbb5d2c`, `6a783ad108442f441bbb5d2d` |
+| Dirac-trained certificate, trackb_seed23.json (9 jobs) | QCi Dirac-3 | `6a783adf08442f441bbb5d2e`, `6a783aea08442f441bbb5d2f`, `6a783af508442f441bbb5d30`, `6a783b0008442f441bbb5d31`, `6a783b0b08442f441bbb5d32`, `6a783b1608442f441bbb5d33`, `6a783b2108442f441bbb5d34`, `6a783b2c08442f441bbb5d35`, `6a783b3608442f441bbb5d36` |
+| Safety, envelope, rank ablation, cert-gap sweeps | CPU (two machines) | `vw_rta_demo.json`, `vw_lyap_*.json`, `results/vw_cert_gap_*_v2.json` |
 
 ### Appendix B — Resource declaration and notes
 
