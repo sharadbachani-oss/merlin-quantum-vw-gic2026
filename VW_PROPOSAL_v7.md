@@ -44,6 +44,8 @@ Assumptions: the plant is a control surrogate for the VLA action head; disturban
 
 **Certification under the measured disturbance class (quantum input to the scored track).** Three ensembles at identical rms power, 3 seeds × 1,000 episodes per cell: against the **measured collective spectrum** the certified boundary is **0.60 rad/s rms** (95.6 ± 0.8% safe; 98.4 ± 0.3% at 0.50). White-noise validation grades 100.0 ± 0.0% safe at every amplitude through 1.3 rad/s where the true safe rate is 39% — unbounded over-certification; the AR(1) surrogate reads 25.2 ± 2.1% at the certified boundary itself. A shallow 16-point anchor-sector spectrum places the boundary at 0.88 rad/s, a 32% envelope error only the full-depth computation catches. The vehicle runs the 22 µs monitor; quantum computes the disturbance model at certification time.
 
+![Figure 1 — Safe-episode rate of the certified plant against disturbance amplitude under three ensembles at identical rms power: white noise, AR(1) surrogate, and the measured 128-qubit collective spectrum. 3 seeds × 1,000 episodes per cell.](C:/quantum ai 2026/figs_v7/vw_boundary.png)
+
 **Resource allocation.** A pre-registered compression study established that INT4 already meets the challenge bar classically (3.97× at 2.45% accuracy drop vs ≥2× at ≤5%) and that the remaining mixed-precision space is flat — the device solved its allocation objective exactly (DP gap 0.0, 9/9 instances) and beat random 5–25×; the finding tells an OEM where not to spend quantum budget, which is why this entry concentrates on the two stages with measured headroom.
 
 **What a successful PoC demonstrates.** The same curriculum selector inside the alignment loop of an accepted VLA backbone with a ≥10% rollout reduction at equal reward, 3 seeds, paired CI above zero against the strongest classical sampler at equal total cost; and a certified control envelope for that backbone's action output, validated against a hardware-computed disturbance class carrying a fidelity certificate.
@@ -62,18 +64,22 @@ Merlin Quantum is the quantum division of Merlin Digital (50+ technology FTE): S
 
 ---
 
-### Appendix A — Receipts
+### Appendix A — Hardware job register (every result regenerates from archived counts)
 
-| claim | artifact | receipt |
-|---|---|---|
-| RL −35.4%, 3/3 seeds | `vw_rl_{A,B,C,D,E}_s{21,22,23}.json` | 71 Dirac-3 job IDs |
-| +9.3-pt robustness, 2× budget equivalence, two machines | `rl_finalquality_classical.json`, `RL_FINALQUALITY_BOX.md` | replicated |
-| Safety 78 → 100%, envelope sealed then confirmed | `vw_rta_demo.json`, `vw_lyap_bias_sweep.json` | 3 seeds × 500 × 2 machines |
-| Flow encoding −26%, 3.5× tighter | `flow_encoding_test.json` | 12 paired Dirac-3 jobs |
-| Certified boundary 0.60 rad/s under measured spectrum | `results/vw_cert_gap_score_v2.json`, `results/vw_cert_gap_boundary_v2.json` | — |
-| 128-qubit spectrum, k = 0..15 | `results/vw_jam_relaxation_spectrum_v2.json` | fez `daa9pn4e74ec73akj9i0`; kingston `d9rdfb1dsedc73agh5ng` |
-| Device-layer instrument | `ncomp_regrade_*`, `t2_bridge_result.json`, `npoint2_result_*` | fez + kingston |
-| Classical attack verdict | `A1_FINAL_VERDICT.md` | k ≤ 6 reproduced, k ≥ 8 contested |
+| measurement | machine | job id(s) | receipt |
+|---|---|---|---|
+| RL curriculum, arm C, 3 seeds (71 jobs) | QCi Dirac-3 | 71 ids in `vw_rl_C_s{21,22,23}.json` | `vw_rl_{A..E}_s*.json` |
+| Dirac-trained certificate seeds | QCi Dirac-3 | 27 ids in `results/trackb_seed{21,22,23}.json` | same |
+| Flow-encoding test, 6 paired trials | QCi Dirac-3 | 12 paired ids | `results/flow_encoding_test.json` |
+| 128q jam-relaxation spectrum v2, k = 0..15, 33 × 32,768 shots | ibm_fez | `daa9pn4e74ec73akj9i0` | `results/vw_jam_relaxation_spectrum_v2.json` |
+| 156q real-time collective interface, exact-theorem anchors 0.9836 / 0.9806 | ibm_fez | `d9rm4j9dsedc73agrb70`; scout `d9rm47opdb6s73e53kqg` | `results/a1p_result_20260808_200224.json` |
+| Two-sided classical boundary series, 16 × 32,768 | ibm_kingston | `d9rdfb1dsedc73agh5ng` | `A1_FINAL_VERDICT.md` |
+| Idle-ZZ atlas, 9/9 edges | ibm_kingston | `da9l3t1qtnsc73d1nhd0`, `da9l9rkjbipc73ff0aqg` | `results/npoint2_result_20260830_014105.json` |
+| Idle-ZZ atlas, 8/9 edges | ibm_fez | `da9eoe6rbfbs73chiq0g`, `da9lqeerbfbs73chq63g` | `results/npoint2_result_20260829_182700.json` |
+| Native-operator E₀ inverted, 5/5 tiles | ibm_kingston / ibm_fez | `da9vgsmrbfbs73ci44d0`, `da9vblkjbipc73ffaio0` | `results/ncomp_regrade_*.json`, `results/nc1_energy_inverted.json` |
+| Directed-path traffic card — converges classically, kept as negative control | ibm_kingston | receipt in file | `results/trafficD_kingston_result.json` |
+| CHSH in-kind anchor S = 2.3604 (+35.9σ), same-day replica +37.0σ | ibm_fez | GIC ledger `chsh_*_20260805_*.json` | — |
+| Safety, envelope, rank ablation, cert-gap sweeps | CPU (two machines) | — | `vw_rta_demo.json`, `vw_lyap_*.json`, `results/vw_cert_gap_*_v2.json` |
 
 ### Appendix B — Resource declaration and notes
 
