@@ -56,6 +56,10 @@ Assumptions: the plant is a control surrogate for the VLA action head; disturban
 
 **The crossing.** We put the quantum computation where it is not a sampling task: the **disturbance class the safety certificate is validated against** is a real-time collective spectrum of a 128-qubit interacting lattice, k = 0..15, 2,656 two-qubit gates at k = 8. It is adjudicated from both sides: our own tensor-network attack on the shipped data reproduces the hardware to 0.4σ at k = 4 and within 1.4σ across five wavevectors at k = 6, then fails past k = 8 (operators exceeding 2×10⁸ terms); the hardware cells beyond that boundary stand at 8.9σ and 11.5σ with a 0.2σ preparation control, and the dominant line is reproduced on a second device. In the customer's units the crossing is the 0.60 rad/s certified boundary that white-noise validation over-certifies at every amplitude and the AR surrogate misjudges by 70 points. **Where it is decisive:** past k = 8, beyond the reach of our own commissioned tensor-network attack (a measured boundary for that method, not a classical impossibility result — a Pauli-propagation attack on the same observable is the next comparator), with k ≤ 6 serving as the classically verified anchor of the same instrument; Phase 2 adds the fidelity certificate and the ion-trap replication.
 
+**Scalability to industrial relevance.** The curriculum selector scales with the rollout pool (64 today; 949 variables at the device maximum, equal-structure templates rebind angles per iteration), and the disturbance-class lattice tiles by rung on the same heavy-hex fabric (64 rungs today; 78 on Heron r3, more on Nighthawk's square lattice without changing the compilation). Quantum work is train- and certification-time only, so fleet size does not enter the per-vehicle cost; the 22 µs monitor runs on existing controller silicon.
+
+**Business value, bounded.** In an OEM's own units: (i) alignment cost — 35.4% fewer rollouts to target against the GRPO baseline means, at a declared cost per rollout *r* and *n* alignment runs per model release, a saving of ≈ 0.35 · 586 · *r* · *n*; (ii) certification — a disturbance envelope that is 32% wrong (shallow spectrum) or 70 points wrong at the operating point (AR surrogate) is either a field incident or an over-conservative envelope that leaves performance on the table; the measured class prices that margin at 0.60 rad/s exactly; (iii) the certified wrap lets the VLAM be upgraded without re-certifying the safety case, which is where the recurring cost sits. Stated as functions of the OEM's cost inputs, not as fixed sums.
+
 **What a successful PoC demonstrates.** The same curriculum selector inside the alignment loop of an accepted VLA backbone with a ≥10% rollout reduction at equal reward, 3 seeds, paired CI above zero against the strongest classical sampler at equal total cost; and a certified control envelope for that backbone's action output, validated against a hardware-computed disturbance class carrying a fidelity certificate.
 
 ## 5. Validation plan
@@ -100,3 +104,14 @@ Merlin Quantum is the quantum division of Merlin Digital (50+ technology FTE): S
 ### Appendix B — Resource declaration and notes
 
 Classical: 32-core workstation, no GPU used for the delivered results; simulation environment numpy/qiskit versions pinned in the repo. Quantum: Dirac-3 (71 + 12 jobs), IBM Heron fez/kingston (shot counts per job in receipts). Phase-2 VLA run: single 8-GPU node, GPU-hours to be declared. Deadline runway: Phase I closes 2026-09-15.
+
+### Appendix C — Claim ledger (measured · planned · comparator · quantum attribution · cost · acceptance)
+
+| claim | status | classical comparator | quantum attribution | total cost charged | acceptance threshold |
+|---|---|---|---|---|---|
+| RL alignment −35.4% rollouts vs GRPO baseline | measured (3 seeds, 71 jobs) | tuned Gibbs 298.7 (per-task tuning), random, optimiser | Dirac-3 sampler | 71 jobs ≈ minutes QPU | ≥ 10% at equal reward, paired CI > 0 |
+| Same selector on OpenVLA-OFT / LIBERO | planned (Phase-2 milestone 1) | strongest classical curriculum, tuned Gibbs | sampler | 8-GPU node, 3 seeds, GPU-h declared | ≥ 10% rollouts-to-target, CI > 0 |
+| Certified boundary 0.60 rad/s under measured class | measured (3 seeds × 1,000) | white-noise, AR(1) surrogates | 128q spectrum as certification input | 1 job × 33 circuits | boundary inside predicted interval |
+| 128q spectrum beyond classical attack (k ≥ 8) | measured; certificate planned | our TN attack (0.4σ at k=4, fails k ≥ 8); Pauli-propagation next | hardware | 33 × 32,768 shots | parity-syndrome fidelity bound + ion replication |
+| 78 → 100% safe under certified wrap | measured (classical) | tuned clipping | none | CPU | envelope sealed before measurement |
+
