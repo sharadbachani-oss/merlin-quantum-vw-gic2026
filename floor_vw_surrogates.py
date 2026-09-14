@@ -106,10 +106,23 @@ def boundary(curve, target=0.956):
 print("\ncertified boundary (amplitude where the safe rate crosses 95.6%):")
 bq = boundary(res["Q"])
 out = {}
+def rate_at(curve_seeds, A):
+    """per-seed safe rate at amplitude A by linear interpolation on the grid"""
+    xs = sorted(curve_seeds); vals = []
+    for sd in range(3):
+        ys = [curve_seeds[a][sd] for a in xs]; vals.append(float(np.interp(A, xs, ys)))
+    return vals
 for k in KINDS:
-    b = boundary(res[k]); out[k] = dict(boundary=b, curve={str(a): float(np.mean(res[k][a])) for a in AMPS})
+    b = boundary(res[k]); out[k] = dict(boundary=b, curve={str(a): float(np.mean(res[k][a])) for a in AMPS},
+                                       curve_seeds={str(a): [float(v) for v in res[k][a]] for a in AMPS})
+    # OUTCOME-2 METRIC: episodes ending safely (under the MEASURED class) at the operating point this surrogate certifies
+    if b is not None:
+        tr = rate_at(res["Q"], b); out[k]["true_safe_rate_at_certified_boundary"] = dict(mean=float(np.mean(tr)), sd=float(np.std(tr)), seeds=tr)
+    else:   # no crossing on the grid: white noise certifies everything -> operating point = grid max; AR(1) certifies nothing -> None
+        top = max(AMPS); tr = rate_at(res["Q"], top) if np.mean(res[k][top]) >= 0.956 else None
+        out[k]["true_safe_rate_at_certified_boundary"] = (dict(mean=float(np.mean(tr)), sd=float(np.std(tr)), seeds=tr, note=f"certifies every amplitude on the grid; evaluated at {top} rad/s") if tr else dict(note="certifies no amplitude on the grid"))
     tag = "REFERENCE" if k == "Q" else ("reproduces Q" if (b and bq and abs(b - bq) <= 0.05) else "misses Q")
     print(f"  {k:4s} boundary {('%.3f' % b) if b else '  none':>7s} rad/s    {tag}")
 out["_meta"] = dict(f_peak_cyc_per_step=F_PEAK, n_bins=len(FREQS), N_episodes=N, seeds=3, target=0.956, Q_boundary=bq)
-json.dump(out, open(os.path.join(HERE, "floor_vw_surrogates.json"), "w"), indent=1)
+json.dump(out, open(os.path.join(HERE, "floor_vw_surrogates_seeds.json"), "w"), indent=1)
 print("\n-> floor_vw_surrogates.json")
