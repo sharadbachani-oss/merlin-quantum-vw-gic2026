@@ -89,7 +89,7 @@ Merlin Quantum is the quantum division of Merlin Digital (50+ technology FTE): S
 
 ## 8. Scope, with treatment
 
-(i) The plant is a lane-keeping surrogate, not a VLA backbone — the OpenVLA-OFT/LIBERO run is the PoC's first milestone. (ii) A fixed-temperature classical Gibbs sampler reaches the target in fewer rollouts than the device (298.7 vs 378.7) and is the arm behind the +9.3-point result; no quantum advantage in alignment is claimed — the device's result is the named-baseline gain, and the VLA milestone tests both samplers at matched budget. (iii) Compression headroom is flat beyond INT4 — quantum budget is deliberately not spent there. (iv) The spectrum carries no fidelity certificate yet (Phase-2 deliverable); the strongest cheap surrogates misplace the boundary by 12–27%. (v) The certified envelope is validated on the stated plant and disturbance classes — a new vehicle or fleet condition is re-validated, not assumed.
+(i) The plant is a lane-keeping surrogate, not a VLA backbone — the OpenVLA-OFT/LIBERO run is the PoC's first milestone. (ii) A fixed-temperature classical Gibbs sampler reaches the target in fewer rollouts than the device (298.7 vs 378.7) and is the arm behind the +9.3-point result; no quantum advantage in alignment is claimed — the device's result is the named-baseline gain, and the VLA milestone tests both samplers at matched budget. (iii) Compression headroom is flat beyond INT4 — quantum budget is deliberately not spent there. (iv) The spectrum carries no fidelity certificate yet (Phase-2 deliverable); the strongest cheap surrogates misplace the boundary by 12–27%. (v) The envelope is validated on the stated plant and classes; new vehicle or fleet conditions are re-validated, not assumed.
 
 ---
 
