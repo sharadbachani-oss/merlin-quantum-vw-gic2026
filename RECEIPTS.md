@@ -23,7 +23,7 @@ credentials; submitting new jobs needs IBM Quantum / qBraid access.
 | Claim | Artifact | Job ID / receipt |
 |---|---|---|
 | 35.4% under GRPO budget, 3/3 seeds | `vw_rl_{A,B,C,D,E}_s{21,22,23}.json` | 71 QCi Dirac-3 job IDs listed in the C-arm JSONs |
-| +9.3-pt robustness at equal budget | `results/rl_finalquality_classical.json` | device arm receipts in `rl_finalquality_dirac.json` |
+| +9.3-pt robustness at equal budget | `results/rl_finalquality_classical.json` | device arm: C-arm rollouts 320 / 368 / 448 in `results/external_receipts/vw_rl_C_s{21,22,23}.json` (mean 378.7 ± 52.9); no separate Dirac final-quality file exists — the +9.3-pt figure is the classical-side receipt |
 | ~2× budget-equivalence + variance collapse, two-box | `RL_FINALQUALITY_BOX.md` (independent machine) | replicated, CPU-only second box |
 | Six-arm ablation complete (D breaks, E parity, C′ confirms) | `rl_cflow_result.json` + arm JSONs | Dirac-3 job IDs per arm |
 
@@ -74,3 +74,7 @@ Flight (scout→fly→grade) needs IBM Quantum / QCi credentials; all grading an
 model gates run credential-free. Open-plan spend guard is pinned in every
 flight script (refuses any backend outside {ibm_fez, ibm_kingston,
 ibm_marrakesh}).
+
+## External receipts shipped with the package (added 2026-09-14)
+
+Artifacts cited above that were produced on the GPU box or in the framework tree are copied verbatim into `results/external_receipts/`: `A1_FINAL_VERDICT.md`, `TRAFFIC_ATTACK_VERDICT.md`, `TRACKA_REPORT.md`, `RL_FINALQUALITY_BOX.md`, `vw_rta_demo.json`, `vw_qens_result.json`, `vw_ceiling_rank_d3.json`, `rl_cflow_result.json`, `vw_lyap_{bias_sweep,seeds,validation}.json`, `vw_rl_C_s{21,22,23}.json`. `rl_cflow_result.json` carries the Dirac job IDs per seed with `rollouts: null`; the rollout counts live in the per-arm files.

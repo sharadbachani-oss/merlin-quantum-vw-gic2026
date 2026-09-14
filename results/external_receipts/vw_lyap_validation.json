@@ -1,0 +1,22 @@
+{
+ "card": "VW TN-Lyapunov core \u00e2\u20ac\u201d validation (2026-08-06)",
+ "areas": {
+  "quadratic": 0.29772214665725455,
+  "tn_r3": 0.41898383292298685,
+  "full": 0.503607031559374
+ },
+ "G1": true,
+ "G2": true,
+ "G2_ratio": 1.407298172565348,
+ "G3": false,
+ "ep_inside": 1.0,
+ "ep_outside": 0.9933333333333333,
+ "G4": true,
+ "null_area": 1.721733441228629e-05,
+ "certified_levels": {
+  "quadratic": 1.0364965059460485,
+  "tn": 1.7107875364476692,
+  "full": 4.150881118017507
+ },
+ "verdict": "3/4 \u00e2\u20ac\u201d see flags"
+}

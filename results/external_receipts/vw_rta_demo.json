@@ -1,0 +1,23 @@
+{
+ "21": {
+  "area": 0.41898383292298685,
+  "viol_alone": 0.762,
+  "viol_wrapped": 0.0,
+  "intervention": 0.64707,
+  "monitor_us": 22.32831619796343
+ },
+ "22": {
+  "area": 0.4777638126065323,
+  "viol_alone": 0.742,
+  "viol_wrapped": 0.0,
+  "intervention": 0.436545,
+  "monitor_us": 22.408166138338856
+ },
+ "23": {
+  "area": 0.4882491692636146,
+  "viol_alone": 0.742,
+  "viol_wrapped": 0.0,
+  "intervention": 0.45254,
+  "monitor_us": 23.64013443060685
+ }
+}
