@@ -30,7 +30,7 @@ We put a quantum component into the two VLAM stages that decide whether the back
 |---|---|
 | RL evaluator, six-arm ladder, safety plant | in the public repo; `python verify.py` (numpy) replays every headline |
 | Dirac-3 | unmetered allocation; 71 curriculum jobs receipted |
-| IBM Heron | Startup Program (applied); the spectrum job exists (`daa9pn4e74ec73akj9i0`); re-flights ≤ 33 circuits × 32,768 shots |
+| IBM Heron | Startup Program (applied); the spectrum job exists (`daa9pn4e74ec73akj9i0`); a re-flight is 33 circuits × 32,768 shots = 1.08 M shots per spectral batch before replicas, calibration and mitigation, which multiply it; total device and classical acquisition cost is reported per run |
 | VLA backbone run (Phase 2) | OpenVLA-OFT / LIBERO on a single 8-GPU node; 3 seeds; GPU-hours declared in the resource declaration |
 | Classical | 32-core workstation for the tensor-network certifier and the adversarial classical attack |
 
