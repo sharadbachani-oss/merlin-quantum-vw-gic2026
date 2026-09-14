@@ -81,7 +81,7 @@ A certificate validated against any of the five classical classes fails its own 
 
 ## 6. Hybrid / cross-domain integration
 
-Quantum work is train/validation-time only; Dirac-3 index sets are verified classically before use. Safety: certificate candidates pass the deterministic grid-plus-Lipschitz certifier; the vehicle runs the 22 µs monitor and fallback. Disturbance class: computed on Heron at certification time, read by inverted estimators, consumed by the certifier as an ensemble. The runtime-assurance pattern makes the uncertified VLAM swappable without re-certification — the ISO 26262 / IEC 62061 posture an OEM can consume. Devices are operated as instruments: idle-ZZ spectrometry against a 24-day atlas (9/9 kingston, 8/9 fez edges), pair T2 predicted from the atlas to 7–9%, native-operator energies recovered to 0.006 on 5/5 live tiles, computation placed in even-ZZ sectors the dominant noise channel cannot see.
+Quantum work is train/validation-time only; Dirac-3 index sets are verified classically before use. Safety: candidates pass the grid-plus-Lipschitz certifier; the vehicle runs the 22 µs monitor. Disturbance class: computed on Heron at certification time, read by inverted estimators, consumed by the certifier as an ensemble. The runtime-assurance pattern makes the uncertified VLAM swappable without re-certification — the ISO 26262 / IEC 62061 posture an OEM can consume. Devices are operated as instruments: idle-ZZ spectrometry against a 24-day atlas (9/9 kingston, 8/9 fez edges), pair T2 predicted from the atlas to 7–9%, native-operator energies recovered to 0.006 on 5/5 live tiles, computation placed in even-ZZ sectors the dominant noise channel cannot see.
 
 ## 7. Team capability
 
