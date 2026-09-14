@@ -61,7 +61,7 @@ A certificate validated against any of the five classical classes fails its own 
 
 ![Figure 1 — Safe-episode rate of the certified plant against disturbance amplitude under three ensembles at identical rms power: white noise, AR(1) surrogate, and the measured 128-qubit collective spectrum. 3 seeds × 1,000 episodes per cell.](C:/quantum ai 2026/figs_v7/vw_boundary.png)
 
-**Resource allocation.** A compression study, protocol frozen before the run, established that INT4 already meets the challenge bar classically (3.97× at 2.45% accuracy drop vs ≥2× at ≤5%) and that the remaining mixed-precision space is flat — the device solved its allocation objective exactly (DP gap 0.0, 9/9 instances) and beat random 5–25×; the finding tells an OEM where not to spend quantum budget, which is why this entry concentrates on the two stages with measured headroom.
+**Resource allocation.** A compression study, protocol frozen before the run, found INT4 already meets the bar classically (3.97× at 2.45% drop) and the mixed-precision space flat; the device solved its allocation objective exactly (9/9 instances). An OEM should not spend quantum budget there, so this entry concentrates on the two stages with measured headroom.
 
 ### Quantum advantage — the frontier wall and the crossing, stated and bounded
 
@@ -81,7 +81,7 @@ A certificate validated against any of the five classical classes fails its own 
 
 ## 6. Hybrid / cross-domain integration
 
-Quantum work is train/validation-time only. Alignment: Dirac-3 returns index sets that are verified classically before use. Safety: certificate candidates pass the deterministic grid-plus-Lipschitz certifier; the vehicle runs the 22 µs monitor and fallback. Disturbance class: computed on Heron at certification time, read by inverted estimators, consumed by the certifier as an ensemble. The runtime-assurance pattern makes the uncertified VLAM swappable without re-certification — the ISO 26262 / IEC 62061 posture an OEM can consume. Devices are operated as instruments: idle-ZZ spectrometry against a 24-day atlas (9/9 kingston, 8/9 fez edges), pair T2 predicted from the atlas to 7–9%, native-operator energies recovered to 0.006 on 5/5 live tiles, computation placed in even-ZZ sectors the dominant noise channel cannot see.
+Quantum work is train/validation-time only; Dirac-3 index sets are verified classically before use. Safety: certificate candidates pass the deterministic grid-plus-Lipschitz certifier; the vehicle runs the 22 µs monitor and fallback. Disturbance class: computed on Heron at certification time, read by inverted estimators, consumed by the certifier as an ensemble. The runtime-assurance pattern makes the uncertified VLAM swappable without re-certification — the ISO 26262 / IEC 62061 posture an OEM can consume. Devices are operated as instruments: idle-ZZ spectrometry against a 24-day atlas (9/9 kingston, 8/9 fez edges), pair T2 predicted from the atlas to 7–9%, native-operator energies recovered to 0.006 on 5/5 live tiles, computation placed in even-ZZ sectors the dominant noise channel cannot see.
 
 ## 7. Team capability
 
