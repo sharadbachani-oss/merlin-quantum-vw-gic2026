@@ -1,0 +1,23 @@
+{
+ "21": {
+  "alone": 1.0,
+  "clipping": 1.0,
+  "rta": 1.0,
+  "interv_clip": 0.00231,
+  "interv_rta": 0.02353
+ },
+ "22": {
+  "alone": 0.43,
+  "clipping": 1.0,
+  "rta": 1.0,
+  "interv_clip": 0.215335,
+  "interv_rta": 0.13879
+ },
+ "23": {
+  "alone": 0.906,
+  "clipping": 1.0,
+  "rta": 1.0,
+  "interv_clip": 0.006725,
+  "interv_rta": 0.01352
+ }
+}

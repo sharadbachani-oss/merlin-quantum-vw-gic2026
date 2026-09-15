@@ -1,76 +1,34 @@
-# Merlin Digital — GIC 2026 Volkswagen Enterprise Track
+# Merlin Quantum — GIC 2026 · Volkswagen — Vision-Language-Action Models
+
+Phase-1 concept proposal, 2026 Global Quantum + AI Challenge.
 
 | | |
 |---|---|
-| **Team** | Merlin Digital |
-| **Project** | Quantum-in-the-Loop VLAM Alignment and Certified Control Safety for in-vehicle / robot-controller compute |
-| **Tracks** | RL Alignment (primary scored) · Safety (secondary scored) |
-| **Context** | VLAM-grade perception and reasoning on ISO 26262 / IEC 62061 controllers, ≤100 ms inference |
-| **Write-up** | `VW_REPORT_v2.md` (challenge map → two VLAM stages → ablation → instrument → roadmap) |
-| **Prior result** | GIC 2026 — **dual-track finalist** (Mitsubishi/AIST materials track); same framework, same instrument |
-| **Public repository** | https://github.com/sharadbachani-oss/merlin-quantum-vw-gic2026 |
+| **Submitted proposal** | [`VW_PROPOSAL_v7.md`](VW_PROPOSAL_v7.md) — rendered as `report.pdf` |
+| **Team** | Merlin Quantum, the quantum applications division of Merlin Digital (Dubai) |
+| **Independent validation** | GIC 2026 **dual-track finalist** — Mitsubishi/AIST materials and QCi tracks; same framework, same instrument |
+| **Repository** | https://github.com/sharadbachani-oss/merlin-quantum-vw-gic2026 |
+| **Superseded material** | `archive/` — earlier drafts and planning notes, kept for provenance; not part of the submission |
 
-## The claim in one line
+## Claim → receipt
 
-A VLAM does not fit on a vehicle. This package puts a quantum / QI
-component into the two stages that decide whether it can ship:
-**RL alignment of the action policy (−35.4% rollouts vs named GRPO,
-+9.3 pt safer at equal budget)** and **certified runtime assurance of
-the control output (77.9% → 100% safe, 22 µs, 4,500× under 100 ms)**.
-Plus a **measured collective disturbance class certifying the safety
-envelope** — a validation input no classical pipeline produces. The 7B
-backbone stays a swappable black box — the deployment posture an OEM
-can consume.
+Every measurement the proposal reports, with the file in this repository that backs it. Each entry resolves inside this repo.
 
-## Challenge demand → this package
+| # | Measurement | Receipt |
+|---:|---|---|
+| 1 | Control safety — the statement's metric against its named baseline (3 seeds × 500 episodes per arm, identical suite, identical starts | [`fable_vw_rubric.py`](fable_vw_rubric.py) · [`vw_rubric_headline.json`](results/cited/vw_rubric_headline.json) · [`vw_rta_demo.json`](results/external_receipts/vw_rta_demo.json) |
+| 2 | Certification under the measured disturbance class. The ensembles are the statement's synthetic perturbation suite; three of them, at identical rms power, 3 seeds × 1,000 episodes per cell: against the measured collective… | [`floor_vw_surrogates.json`](floor_vw_surrogates.json) |
+| 3 | Safety stage, scored on the statement's metric — episodes ending in a safe state at the operating point the certificate certifies (mean ± SD, 3 seeds × 400 episodes; the quantum component, the disturbance class, is the only… | [`floor_vw_surrogates_seeds.json`](floor_vw_surrogates_seeds.json) |
+| 4 | Resource allocation. The statement's Compression sub-track specifies LLaVA-1.5-7B on nuScenes or Waymo against INT8 via bitsandbytes; we measured a vision tower outside it (CLIP ViT-B/32, CIFAR-100 probe, protocol frozen),… | [`TRACKA_REPORT.md`](results/external_receipts/TRACKA_REPORT.md) |
+| 5 | Directed-path traffic card — converges classically, kept as negative control | [`trafficD_kingston_result.json`](results/trafficD_kingston_result.json) |
+| 6 | Flow-encoding test, 6 paired trials (12 jobs) | [`flow_encoding_test.json`](results/flow_encoding_test.json) |
+| 7 | Surrogate-class ablation, seed-level (3 × 400 episodes × 6 classes × 11 amplitudes) | [`floor_vw_surrogates.py`](floor_vw_surrogates.py) |
+| 8 | The unscoped compression study and the independent RL replication ran on a second internal workstation — the "GPU box" of the receipts | [`RL_FINALQUALITY_BOX.md`](results/external_receipts/RL_FINALQUALITY_BOX.md) |
 
-| Demand | Deliverable |
-|---|---|
-| Component in ≥1 VLAM stage | Alignment (Dirac-3 curriculum) + control-output safety wrap |
-| ≥10% efficiency or ≤2× @ ≤5% | −35.4% RL budget (bar 10%); compression not scored |
-| ≥3 runs, mean ± SD; Q/QI ablation | 3 seeds; six-arm RL ladder + rank ablation |
-| ≤100 ms inference | 22 µs monitor; quantum is train-time only |
-| 4–8 page report; clean-env README | `VW_REPORT_v2.md`; this file + `python verify.py` |
-
-## Verify the headline claims
-
-| Claim (§) | Command / artifact | Expected |
-|---|---|---|
-| RL 35% budget + product robustness (§2) | `results/rl_finalquality_classical.json` | E 76.4% vs A 67.1% safe (+9.3 pts) |
-| RL device arm (§2) | `python fable_vw_rl.py 21 A` (baseline, CPU) | rollouts-to-target ~448 |
-| Safety 78→100%, 22 µs (§3) | `results/vw_rta_demo.json` | 100% wrapped; ~22e-6 s / decision |
-| Flow encoding of the RL quantum stage (§5) | `results/flow_encoding_test.json` | simplex −2.41 vs binary −1.91, 3.5× tighter |
-| Supporting S(q,ω), no continuation (annex) | `results/vw_jam_relaxation_spectrum.json` | dominant collective line 0.0625 cyc/step |
-| Exact-theorem anchors (annex) | `python fable_a1p_flight.py model` | 4/4 gates; waveform corr ~0.98 |
-| Full receipt map | `RECEIPTS.md` | claim → file → job-ID |
-
-Clean-environment check of every headline number:
+## Verifying
 
 ```
-pip install -r requirements.txt
 python verify.py
 ```
 
-No cloud credentials required. Flight (scout→fly→grade) needs IBM Quantum
-/ QCi Dirac-3 access and is not part of verification.
-
-## What is in this package
-
-```
-VW_REPORT_v2.md                4–8 page technical report (challenge-aligned)
-QUANTUM_ADVANTAGE_EXHIBIT.md   supporting mobility-spectrum annex (not scored)
-RECEIPTS.md                    claim -> file -> job-ID map
-results/                       result JSONs behind every headline number
-verify.py                      credential-free headline check
-fable_a1p_flight.py            exact-theorem anchor derivation (model gate = CPU)
-fable_traffic_directed.py      directed mobility card (model gate = CPU)
-fable_vw_rl.py                 quantum-in-the-loop RL training pipeline
-```
-
-## Discipline
-
-Every result carries a frozen pre-registration written **before** execution,
-≥3 seeds with mean ± SD, in-job controls, and cloud job IDs. Key results are
-replicated on a second independent machine — every number on the same
-receipt class, from cloud job to report table. Open-plan spend guard pinned
-in every flight script.
+Replays the headline numbers from archived counts — no credentials, no network, numpy only.
