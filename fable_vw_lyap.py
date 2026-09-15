@@ -38,8 +38,12 @@ GATES:
      certify anything (cannot manufacture safety that is not there).
 KILL-SWITCH (pre-stated): if G2 < 1.1x, the TN adds nothing over quadratic
 on this problem class -> report and fall back to the RL-alignment track."""
+import os
 import json, math
 import numpy as np
+
+_R = os.path.join(os.path.dirname(os.path.abspath(__file__)), "results", "cited")
+os.makedirs(_R, exist_ok=True)
 
 rng = np.random.default_rng(21)
 V_CAR, L_WB, DMAX = 15.0, 2.7, 0.35
@@ -247,7 +251,7 @@ def main():
                        "back to RL-alignment" if kill else "see flags"))
     print(f"\n  VERDICT: {out['verdict']}")
     json.dump(dict(card="VW TN-Lyapunov core â€” validation (2026-08-06)", **out),
-              open(r"C:\fable\vw_lyap_validation.json", "w"), indent=1)
+              open(r"{_R}\vw_lyap_validation.json", "w"), indent=1)
     print("-> vw_lyap_validation.json")
     return 0 if npass == 4 else 1
 

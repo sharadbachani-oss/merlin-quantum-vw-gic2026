@@ -21,11 +21,14 @@ The learned policy: MLP 2-16-16-1 (tanh), behavior-cloned from the nominal
 controller on SHORT demonstrations with label noise — realistic BC flaws
 (covariate shift far from demos) + 100 ms actuation delay at deployment.
 """
-import json, sys, time
+import json, os, sys, time
 import numpy as np
 
-sys.path.insert(0, r"C:\fable\python")
+sys.path.insert(0, r"{_R}\python")
 import fable_vw_lyap as m
+
+_R = os.path.join(os.path.dirname(os.path.abspath(__file__)), "results", "cited")
+os.makedirs(_R, exist_ok=True)
 
 m.set_regime("v15_tight")
 DT = m.DT_EP
@@ -135,7 +138,10 @@ def main():
     print(f"\nmean+-SD safe: alone {100*ms('alone')[0]:.1f}+-{100*ms('alone')[1]:.1f}% | "
           f"clipping {100*ms('clipping')[0]:.1f}+-{100*ms('clipping')[1]:.1f}% | "
           f"RTA {100*ms('rta')[0]:.1f}+-{100*ms('rta')[1]:.1f}%")
-    json.dump(out, open(r"C:\fable\vw_rubric_headline.json", "w"), indent=1)
+    _out = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                        "results", "cited", "vw_rubric_headline.json")
+    os.makedirs(os.path.dirname(_out), exist_ok=True)
+    json.dump(out, open(_out, "w"), indent=1)
     return 0
 
 

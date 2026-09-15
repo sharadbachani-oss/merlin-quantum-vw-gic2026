@@ -33,6 +33,9 @@ import numpy as np
 sys.path.insert(0, __import__("os").path.dirname(__file__))
 import fable_vw_lyap as m
 
+_R = os.path.join(os.path.dirname(os.path.abspath(__file__)), "results", "cited")
+os.makedirs(_R, exist_ok=True)
+
 m.set_regime("v15_tight")
 DT, T_EP = m.DT_EP, 6.0
 SIGMA = 0.08
@@ -206,7 +209,7 @@ def main():
                 break                            # device arm: a few extra receipts
     out = dict(arm=ARM, seed=SEED, target=target, r_nominal=r_nom,
                rollouts_to_target=hit, curve=curve, receipts=receipts)
-    p = rf"C:\fable\vw_rl_{ARM}_s{SEED}.json"
+    p = rf"{_R}\vw_rl_{ARM}_s{SEED}.json"
     json.dump(out, open(p, "w"), indent=1)
     print(f"RESULT arm {ARM}: rollouts-to-target {hit} "
           f"({len(receipts)} device jobs) -> {p}")

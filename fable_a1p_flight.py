@@ -3,7 +3,7 @@ fable_a1p_flight.py — A1-P: collective-sector spectroscopy, phase-channel
 style. Framework-led per FRAMEWORK_TRUST_LOCK: derived spectrum frozen
 before flight; anchors graded against EXACT closed-orbit waveforms; detuned
 control must move; collective sector recorded under the contested-cells
-rule. Fresh files live in C:\\quantum ai 2026; C:\\fable is read-only.
+rule. Generated files are written beside this script; the engine directory is read-only.
 
 Stages: derive -> scout -> fly -> grade    (python fable_a1p_flight.py <stage>)
 """
