@@ -37,10 +37,12 @@
 | RL evaluator, six-arm ladder, safety plant | in the public repo; `python verify.py` (numpy, no credentials) re-derives the headline numbers from archived JSON; the rest regenerate from their named scripts and result files |
 | Dirac-3 | unmetered allocation; 71 curriculum jobs receipted |
 | IBM Heron | Startup Program (applied); the spectrum job exists (`daa9pn4e74ec73akj9i0`); a re-flight is the 1.08 M-shot spectral batch costed in §4, before replicas, calibration and mitigation |
-| VLA backbone run (Phase 2) | OpenVLA-OFT / LIBERO on a single 8-GPU node; 3 seeds; declared in Appendix B |
+| VLA backbone run (Phase 2) | OpenVLA-OFT / LIBERO on a single 8-GPU node; 3 seeds; declared in the resource statement in §3 |
 | Classical | 32-core workstation for the tensor-network certifier and the adversarial classical attack |
 
 Assumptions: the plant is the §2 control surrogate; disturbance amplitudes in rad/s rms. Constraints: quantum hardware is never an in-vehicle component, and all quantum work is train- or certification-time.
+
+**Resource declaration (statement §6).** **GPU type and count:** none for the scored results. The RL ladder, safety wrap, certificate and surrogate ablation are CPU-only on a 32-core workstation, replicated on a second machine; the unscoped compression study and the independent RL replication ran on a second internal workstation whose GPU type its receipts do not record. **GPU-hours and energy:** not separately metered, and zero GPU-hours are attributable to the scored results; the quantum-side budget is declared as shots instead (Appendix A, e.g. 1.08 M for the spectral batch). **Environment:** no quantum simulator is used for delivered results, which come from IBM Heron and Dirac-3 hardware plus CPU numerics; replication needs numpy ≥ 1.24, qiskit ≥ 1.0 and qiskit-ibm-runtime ≥ 0.20, pinned in `requirements.txt`. **Quantum jobs:** Dirac-3 83, IBM Heron fez and kingston with per-job shot counts in the receipts. **Phase 2:** single 8-GPU node, 3 seeds, GPU-hours and energy declared per run.
 
 ## 4. Expected impact
 
@@ -116,20 +118,14 @@ Merlin Quantum is the quantum division of Merlin Digital (50+ technology FTE): S
 | Dirac-trained certificate, trackb seeds 21/22/23 (9 jobs each) | QCi Dirac-3 | `6a783a7c08442f441bbb5d25` … `6a783be408442f441bbb5d3f` — full list in the public repository |
 | Safety, envelope, rank ablation, cert-gap sweeps | CPU (two machines) | `vw_rta_demo.json`, `vw_lyap_*.json`, `results/vw_cert_gap_*_v2.json` |
 
-### Appendix B — Resource declaration (statement §6) and notes
-
-**GPU type and count:** none for the scored results — the RL ladder, the safety wrap, the certificate and the surrogate ablation are CPU-only on a 32-core workstation, replicated on a second machine. The unscoped compression study and the independent RL replication ran on a second internal workstation — the "GPU box" of the receipts (`TRACKA_REPORT.md`, `RL_FINALQUALITY_BOX.md`) — whose GPU type and count those receipts do not record. **Total GPU-hours:** not separately metered; zero attributable to the scored results. **Simulation environment and version:** no quantum simulator is used for delivered results (IBM Heron and Dirac-3 hardware plus CPU numerics); replication environment is numpy ≥ 1.24, qiskit ≥ 1.0, qiskit-ibm-runtime ≥ 0.20 (`requirements.txt`), exact versions pinned in the repo. **Estimated energy consumption:** not separately metered; the quantum-side budget is declared as shots (Appendix A — e.g. 33 × 32,768 = 1.08 M shots for the spectral batch). Quantum jobs: Dirac-3 (71 + 12), IBM Heron fez/kingston (per-job shot counts in the receipts). Phase-2 VLA run: single 8-GPU node, 3 seeds; GPU-hours and energy declared per run. Deadline runway: Phase I closes 2026-09-15.
-
-### Appendix C — Claim ledger (measured · planned · comparator · quantum attribution · cost · acceptance)
+### Appendix B — Claim ledger (measured · planned · comparator · quantum attribution · cost · acceptance)
 
 | claim | status | classical comparator | quantum attribution | total cost charged | acceptance threshold |
 |---|---|---|---|---|---|
-| RL alignment −35.4% rollouts vs GRPO baseline | measured (3 seeds, 71 jobs) | fixed-temperature Gibbs 298.7 (ahead of the device), random, optimiser | mechanism, not device | 71 jobs ≈ minutes QPU | ≥ 10% vs GRPO (met); vs best classical (not met) — milestone 2 |
-| +9.3 pts final quality at equal budget; ~2× budget equivalence | measured (Gibbs curriculum, two machines) | GRPO-32 | mechanism | CPU | replicated (met) |
+| RL alignment: −35.4% rollouts to target against the GRPO baseline, and +9.3 points of final quality at equal budget, about 2× budget equivalence | measured (3 seeds, 71 jobs; curriculum replicated on two machines) | fixed-temperature Gibbs 298.7, ahead of the device, with random and optimiser arms; GRPO-32 | mechanism, not device | 71 jobs × minutes QPU, plus CPU | ≥ 10% vs GRPO met, vs best classical not met (milestone 2); final quality replicated |
 | External-reference safety test (OpenVLA-OFT / LIBERO): class-validated vs five surrogate-validated certificates | planned (Phase-2 milestone 1, protocol frozen) | five classical disturbance classes | disturbance class (Heron, 128q) | 8-GPU node, 3 seeds × 500 episodes | lowest unsafe rate at the certified point, paired CI > 0 |
 | Same selector on OpenVLA-OFT / LIBERO and CARLA AD scenarios (the statement's named AD environment) | planned (Phase-2 milestone 2) | fixed-temperature Gibbs, GRPO | sampler | same node | ≥ 10% rollouts-to-target, CI > 0 |
-| Certified boundary 0.60 rad/s under measured class | measured (3 seeds × 1,000) | white-noise and AR(1) (weak); AR(2), dominant-line sinusoid, narrowband as the strong floors — 0.714 / 0.701 / 0.792 vs 0.624 measured | 128q spectrum as certification input | 1 job × 33 circuits | no cheap surrogate reproduces it; competent fits miss by 12–27% |
+| Certified boundary 0.60 rad/s under the measured class, and only that class meets the safety criterion at its own certified point: 95.6 ± 0.3% safe, against 39.5–92.5% or no certificate at all for every classical class | measured (3 seeds × 1,000, and × 400 per cell) | white noise and AR(1) as the weak floors; AR(2), dominant-line sinusoid and narrowband as the strong ones, placing the boundary at 0.714 / 0.701 / 0.792 against 0.624 measured | 128q spectrum as certification input | 1 job × 33 circuits + CPU | no cheap surrogate reproduces the boundary, competent fits miss it by 12–27%, and ≥ 95.6% safe holds only with the measured class |
 | 128q spectrum beyond classical attack (k ≥ 8) | measured; crossing costed | sparse-Pauli Heisenberg propagation, validated 10⁻¹⁶ vs dense — calibrated against the device at 0.4σ (k=4), 1.4σ (k=6), stopped past 2×10⁸ terms at k ≥ 8; TN contraction next | hardware | 33 × 32,768 shots = 1.08 M per batch | k ≥ 8 cells ≥ 8σ over the 0.2σ control on re-flight; ion-trap replication of the dominant line; non-vacuous parity-syndrome bound |
 | 77.9 → 100.0% safe under certified wrap | measured (3 × 500) | named clipping baseline, also 100.0% but no a-priori envelope | none | CPU | envelope sealed before measurement |
-| Only the measured class meets the criterion at its certified point (95.6 ± 0.3%); every classical class lands at 39.5–92.5% safe or certifies nothing | measured (3 seeds × 400 per cell) | white, AR(1), AR(2), dominant line, narrowband | disturbance class (Heron, 128q) | 33 circuits + CPU | ≥ 95.6% safe at the certified point — met only with the measured class |
 
